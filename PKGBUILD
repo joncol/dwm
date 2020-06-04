@@ -14,13 +14,17 @@ options=(zipman)
 depends=('libx11' 'libxinerama' 'libxft' 'freetype2' 'st' 'dmenu')
 install=dwm.install
 source=(http://dl.suckless.org/dwm/dwm-$pkgver.tar.gz
-	config.h
-	dwm.desktop)
+        https://dwm.suckless.org/patches/autostart/dwm-autostart-20161205-bb3bd6f.diff
+        config.h
+        dwm.desktop)
 sha256sums=('97902e2e007aaeaa3c6e3bed1f81785b817b7413947f1db1d3b62b8da4cd110e'
-            'ce156c4ff6be6f664f5c1eb41e8ae8228c15d0282410be3ecdd58598bb8867d2'
+            'e2b59b2c591c76ff95efec8288ef7796313951c52b24dd49ab23fdae98460608'
+            '921e0f2a50bf87af23dc9c95d442da7fd56f5ce8678d115c726284dbeecdecb8'
             'bc36426772e1471d6dd8c8aed91f288e16949e3463a9933fee6390ee0ccd3f81')
+_sourcedir=$pkgname-$pkgver
 
 prepare() {
+  patch --directory="$_sourcedir" --strip=1 < dwm-autostart-20161205-bb3bd6f.diff
   cd "$srcdir/$pkgname-$pkgver"
   cp "$srcdir/config.h" config.h
 }
