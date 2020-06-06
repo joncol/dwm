@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx  = 1;        /* border pixel of windows */
+static const unsigned int borderpx  = 2;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 
 /* vanitygaps */
@@ -21,10 +21,12 @@ static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
 static const char col_cyan[]        = "#005577";
 static const char col_20000_leagues_under_the_sea[] = "#1B1464";
+static const char rogue_pink[] = "#f8a5c2";
+static const char flamingo_pink[] = "#f78fb3";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-	[SchemeSel]  = { col_gray4, col_20000_leagues_under_the_sea, col_20000_leagues_under_the_sea },
+	[SchemeSel]  = { col_gray4, col_20000_leagues_under_the_sea, flamingo_pink },
 };
 
 /* tagging */
@@ -35,9 +37,10 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
+	/* class          instance    title       tags mask     iscentered   isfloating   monitor */
+	{ "Gimp",         NULL,       NULL,       0,            0,           1,           -1 },
+	{ "Firefox",      NULL,       NULL,       1 << 8,       0,           0,           -1 },
+	{ "Pavucontrol",  NULL,       NULL,       1 << 8,       1,           0,           -1 },
 };
 
 /* layout(s) */
@@ -50,6 +53,8 @@ static const Layout layouts[] = {
 	{ "[]=",      tile },    /* first entry is default */
 	{ "><>",      NULL },    /* no layout function means floating behavior */
 	{ "[M]",      monocle },
+	{ "|M|",      centeredmaster },
+	{ ">M>",      centeredfloatingmaster },
 };
 
 /* key definitions */
@@ -67,6 +72,7 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_20000_leagues_under_the_sea, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "st", "-e", "tmux", NULL };
+static const char *lockcmd[]  = { "slock", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -88,14 +94,14 @@ static Key keys[] = {
 	{ MODKEY|Mod1Mask|ControlMask,  XK_l,      incrigaps,      {.i = -1 } },
 	{ MODKEY|Mod1Mask,              XK_0,      togglegaps,     {0} },
 	{ MODKEY|Mod1Mask|ShiftMask,    XK_0,      defaultgaps,    {0} },
-	{ MODKEY,                       XK_y,      incrihgaps,     {.i = +1 } },
-	{ MODKEY,                       XK_o,      incrihgaps,     {.i = -1 } },
-	{ MODKEY|ControlMask,           XK_y,      incrivgaps,     {.i = +1 } },
-	{ MODKEY|ControlMask,           XK_o,      incrivgaps,     {.i = -1 } },
-	{ MODKEY|Mod1Mask,              XK_y,      incrohgaps,     {.i = +1 } },
-	{ MODKEY|Mod1Mask,              XK_o,      incrohgaps,     {.i = -1 } },
-	{ MODKEY|ShiftMask,             XK_y,      incrovgaps,     {.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_o,      incrovgaps,     {.i = -1 } },
+	// { MODKEY,                       XK_y,      incrihgaps,     {.i = +1 } },
+	// { MODKEY,                       XK_o,      incrihgaps,     {.i = -1 } },
+	// { MODKEY|ControlMask,           XK_y,      incrivgaps,     {.i = +1 } },
+	// { MODKEY|ControlMask,           XK_o,      incrivgaps,     {.i = -1 } },
+	// { MODKEY|Mod1Mask,              XK_y,      incrohgaps,     {.i = +1 } },
+	// { MODKEY|Mod1Mask,              XK_o,      incrohgaps,     {.i = -1 } },
+	// { MODKEY|ShiftMask,             XK_y,      incrovgaps,     {.i = +1 } },
+	// { MODKEY|ShiftMask,             XK_o,      incrovgaps,     {.i = -1 } },
 	/* end of vanitygaps keys */
 	{ MODKEY,                       XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
@@ -103,6 +109,8 @@ static Key keys[] = {
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
+	{ MODKEY,                       XK_u,      setlayout,      {.v = &layouts[3]} },
+	{ MODKEY,                       XK_o,      setlayout,      {.v = &layouts[4]} },
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY|ShiftMask,             XK_f,      togglefullscr,  {0} },
@@ -122,6 +130,7 @@ static Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_Delete, quit,           {0} },
+	{ MODKEY|ShiftMask,             XK_x,      spawn,          {.v = lockcmd } },
 };
 
 /* button definitions */

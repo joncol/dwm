@@ -16,7 +16,10 @@ install=dwm.install
 source=(http://dl.suckless.org/dwm/dwm-$pkgver.tar.gz
         https://dwm.suckless.org/patches/actualfullscreen/dwm-actualfullscreen-20191112-cb3f58a.diff
         https://dwm.suckless.org/patches/autostart/dwm-autostart-20161205-bb3bd6f.diff
+        https://dwm.suckless.org/patches/center/dwm-center-6.2.diff
+        https://dwm.suckless.org/patches/centeredmaster/dwm-centeredmaster-6.1.diff
         https://dwm.suckless.org/patches/hide_vacant_tags/dwm-hide_vacant_tags-6.2.diff
+        https://dwm.suckless.org/patches/noborder/dwm-noborderfloatingfix-6.2.diff
         https://dwm.suckless.org/patches/pertag/dwm-pertag-6.2.diff
         https://dwm.suckless.org/patches/vanitygaps/dwm-vanitygaps-20190508-6.2.diff
         config.h
@@ -24,16 +27,23 @@ source=(http://dl.suckless.org/dwm/dwm-$pkgver.tar.gz
 sha256sums=('97902e2e007aaeaa3c6e3bed1f81785b817b7413947f1db1d3b62b8da4cd110e'
             '7b4cabdccc8af6ee3d3819452e5028dd9d926b1edc4496f102e19210f0fcd785'
             'e2b59b2c591c76ff95efec8288ef7796313951c52b24dd49ab23fdae98460608'
+            'd101eee27b6bf0e8847a93e3b95bf63a64e00251c8ff3cc581c55af5e9a7a60e'
+            '4914086ae33aee6c34e1ffded484ada465d1eff3bf39372087e84cd6bba04fb0'
             '716d43cda73744abbe12c1ecd20fd55769c2a36730a57d0a12c09c06854b7fa8'
+            'a2cc6b3ac8b33e13a94356beb433cc6e62ac8ef03e14c0bc6706df8883679d84'
             '055da0f12dbfde9e50df54e1f2d87966466404a36c056efb94bb21ab03b94b10'
             '148e47ed1e8fdbc510b68db27051e0e640d0d55fdcf214afb07d6ecb6ac841fc'
-            'aa1d958045cf792adeaa8f7d62e684557b7aa95658e2f5d8ebc2de4573f42de4'
+            'd836e3c682d63da5bd766d385b31d0b56479b376188aa8f6e2e9432fecb03970'
             'bc36426772e1471d6dd8c8aed91f288e16949e3463a9933fee6390ee0ccd3f81')
+
 _sourcedir=$pkgname-$pkgver
 
 prepare() {
   patch --directory="$_sourcedir" -p1 < dwm-actualfullscreen-20191112-cb3f58a.diff
   patch --directory="$_sourcedir" -p1 < dwm-autostart-20161205-bb3bd6f.diff
+  patch --directory="$_sourcedir" -p1 < dwm-center-6.2.diff
+  patch --directory="$_sourcedir" -p1 < dwm-centeredmaster-6.1.diff
+  patch --directory="$_sourcedir" -p1 < dwm-noborderfloatingfix-6.2.diff
   patch --directory="$_sourcedir" -p1 < dwm-pertag-6.2.diff
   patch --directory="$_sourcedir" -p1 < dwm-hide_vacant_tags-6.2.diff
   patch --directory="$_sourcedir" -p1 < dwm-vanitygaps-20190508-6.2.diff
