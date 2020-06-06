@@ -15,27 +15,27 @@ depends=('libx11' 'libxinerama' 'libxft' 'freetype2' 'st' 'dmenu')
 install=dwm.install
 source=(http://dl.suckless.org/dwm/dwm-$pkgver.tar.gz
         https://dwm.suckless.org/patches/actualfullscreen/dwm-actualfullscreen-20191112-cb3f58a.diff
-        https://dwm.suckless.org/patches/alternativetags/dwm-alternativetags-6.2.diff
         https://dwm.suckless.org/patches/autostart/dwm-autostart-20161205-bb3bd6f.diff
-        dwm-pertag-6.2.diff
+        https://dwm.suckless.org/patches/hide_vacant_tags/dwm-hide_vacant_tags-6.2.diff
+        https://dwm.suckless.org/patches/pertag/dwm-pertag-6.2.diff
         https://dwm.suckless.org/patches/vanitygaps/dwm-vanitygaps-20190508-6.2.diff
         config.h
         dwm.desktop)
 sha256sums=('97902e2e007aaeaa3c6e3bed1f81785b817b7413947f1db1d3b62b8da4cd110e'
             '7b4cabdccc8af6ee3d3819452e5028dd9d926b1edc4496f102e19210f0fcd785'
-            '126d8b87febd0cf81fefdfbc20c2a78fe717391c3f9a98d14569381b39df4d01'
             'e2b59b2c591c76ff95efec8288ef7796313951c52b24dd49ab23fdae98460608'
-            '4e6805af7533263718e8c81b53298c2c890c6277972598ed345259f23610241c'
+            '716d43cda73744abbe12c1ecd20fd55769c2a36730a57d0a12c09c06854b7fa8'
+            '055da0f12dbfde9e50df54e1f2d87966466404a36c056efb94bb21ab03b94b10'
             '148e47ed1e8fdbc510b68db27051e0e640d0d55fdcf214afb07d6ecb6ac841fc'
-            '4594fa9733a10e5f9045948224a45e1a067a8990c4744fb93d9c228719a97c65'
+            'aa1d958045cf792adeaa8f7d62e684557b7aa95658e2f5d8ebc2de4573f42de4'
             'bc36426772e1471d6dd8c8aed91f288e16949e3463a9933fee6390ee0ccd3f81')
 _sourcedir=$pkgname-$pkgver
 
 prepare() {
   patch --directory="$_sourcedir" -p1 < dwm-actualfullscreen-20191112-cb3f58a.diff
-  patch --directory="$_sourcedir" -p1 < dwm-alternativetags-6.2.diff
   patch --directory="$_sourcedir" -p1 < dwm-autostart-20161205-bb3bd6f.diff
   patch --directory="$_sourcedir" -p1 < dwm-pertag-6.2.diff
+  patch --directory="$_sourcedir" -p1 < dwm-hide_vacant_tags-6.2.diff
   patch --directory="$_sourcedir" -p1 < dwm-vanitygaps-20190508-6.2.diff
   cd "$srcdir/$pkgname-$pkgver"
   cp "$srcdir/config.h" config.h
