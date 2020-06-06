@@ -10,10 +10,11 @@ index 4465af1..6474055 100644
  struct Monitor {
  	char ltsymbol[16];
  	float mfact;
-@@ -130,6 +131,7 @@ struct Monitor {
+@@ -130,7 +131,8 @@ struct Monitor {
  	Monitor *next;
  	Window barwin;
  	const Layout *lt[2];
+ 	unsigned int alttag;
 +	Pertag *pertag;
  };
  
