@@ -23,10 +23,18 @@ static const char col_cyan[]        = "#005577";
 static const char col_20000_leagues_under_the_sea[] = "#1B1464";
 static const char rogue_pink[] = "#f8a5c2";
 static const char flamingo_pink[] = "#f78fb3";
+static const unsigned int baralpha = 0xd0;
+static const unsigned int borderalpha = OPAQUE;
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
 	[SchemeSel]  = { col_gray4, col_20000_leagues_under_the_sea, flamingo_pink },
+};
+
+static const unsigned int alphas[][3]      = {
+	/*               fg      bg        border     */
+	[SchemeNorm] = { OPAQUE, baralpha, borderalpha },
+	[SchemeSel]  = { OPAQUE, baralpha, borderalpha },
 };
 
 /* tagging */

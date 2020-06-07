@@ -16,6 +16,7 @@ install=dwm.install
 source=(http://dl.suckless.org/dwm/dwm-$pkgver.tar.gz
         dwm-fancybar-hide_vacant_tags-6.2.diff
         https://dwm.suckless.org/patches/actualfullscreen/dwm-actualfullscreen-20191112-cb3f58a.diff
+        https://dwm.suckless.org/patches/alpha/dwm-alpha-20180613-b69c870.diff
         https://dwm.suckless.org/patches/attachaside/dwm-attachaside-6.1.diff
         https://dwm.suckless.org/patches/autostart/dwm-autostart-20161205-bb3bd6f.diff
         https://dwm.suckless.org/patches/center/dwm-center-6.2.diff
@@ -29,6 +30,7 @@ source=(http://dl.suckless.org/dwm/dwm-$pkgver.tar.gz
 sha256sums=('97902e2e007aaeaa3c6e3bed1f81785b817b7413947f1db1d3b62b8da4cd110e'
             'b3533b2ca3564c7040d0bab0198dd605d2600d87c00dab0ec0c2e4d7be84df16'
             '7b4cabdccc8af6ee3d3819452e5028dd9d926b1edc4496f102e19210f0fcd785'
+            '568bbc45091da2ebfb72e71dbf653899723ec235adc4007602edb0522541f9d5'
             '86bdb4291c0f8f9b0c6fbbac9f05403224872b786fc5e74f3b141c8f2ce6c7a1'
             'e2b59b2c591c76ff95efec8288ef7796313951c52b24dd49ab23fdae98460608'
             'd101eee27b6bf0e8847a93e3b95bf63a64e00251c8ff3cc581c55af5e9a7a60e'
@@ -37,13 +39,14 @@ sha256sums=('97902e2e007aaeaa3c6e3bed1f81785b817b7413947f1db1d3b62b8da4cd110e'
             '055da0f12dbfde9e50df54e1f2d87966466404a36c056efb94bb21ab03b94b10'
             '1e9b731366201bc5d84bd0cd1fd140a6cc5756f5cd966f4e48a62160a58c4ad3'
             '148e47ed1e8fdbc510b68db27051e0e640d0d55fdcf214afb07d6ecb6ac841fc'
-            '3e268c40ac10aeb28283deaa4ac3066181a4876cd79fc44cfef5c1a33a43a9e9'
+            '41c5d59b733113ae079ff1d59cfc44156452196c4ff9f822d3a3874a70f9b975'
             'bc36426772e1471d6dd8c8aed91f288e16949e3463a9933fee6390ee0ccd3f81')
 
 _sourcedir=$pkgname-$pkgver
 
 prepare() {
   patch --verbose --directory="$_sourcedir" -Np1 < dwm-actualfullscreen-20191112-cb3f58a.diff
+  patch --verbose --directory="$_sourcedir" -Np1 < dwm-alpha-20180613-b69c870.diff
   patch --verbose --directory="$_sourcedir" -Np1 < dwm-attachaside-6.1.diff
   patch --verbose --directory="$_sourcedir" -Np1 < dwm-autostart-20161205-bb3bd6f.diff
   patch --verbose --directory="$_sourcedir" -Np1 < dwm-center-6.2.diff
