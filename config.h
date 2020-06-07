@@ -76,6 +76,8 @@ static const char *lockcmd[]    = { "slock", NULL };
 static const char *voldowncmd[] = { ".local/bin/lower_volume.sh", NULL };
 static const char *volupcmd[]   = { ".local/bin/raise_volume.sh", NULL };
 
+#include "selfrestart.c"
+
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
@@ -132,6 +134,7 @@ static Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_Delete, quit,           {0} },
+	{ MODKEY|ShiftMask,             XK_r,      self_restart,   {0} },
 	{ MODKEY|ShiftMask,             XK_x,      spawn,          {.v = lockcmd } },
 	{ MODKEY,                       XK_F1,     spawn,          {.v = voldowncmd } },
 	{ MODKEY,                       XK_F2,     spawn,          {.v = volupcmd } },
