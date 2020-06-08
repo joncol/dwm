@@ -1,5 +1,14 @@
-/*.diff
 /dwm-*-x86_64.pkg.tar.xz
 /dwm-*.tar.gz
 /pkg/
 /src/
+dwm-actualfullscreen-20191112-cb3f58a.diff
+dwm-alpha-20180613-b69c870.diff
+dwm-attachaside-6.1.diff
+dwm-autostart-20161205-bb3bd6f.diff
+dwm-center-6.2.diff
+dwm-centeredmaster-6.1.diff
+dwm-noborderfloatingfix-6.2.diff
+dwm-pertag-6.2.diff
+dwm-r1615-selfrestart.diff
+dwm-vanitygaps-20190508-6.2.diff
