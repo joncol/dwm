@@ -55,7 +55,7 @@ prepare() {
   patch --directory="$_sourcedir" -Np1 < dwm-fancybar-hide_vacant_tags-6.2.diff
   patch --directory="$_sourcedir" -Np1 < dwm-noborderfloatingfix-6.2.diff
   patch --directory="$_sourcedir" -Np1 < dwm-pertag-6.2.diff
-  rm "$_sourcedir"/selfrestart.c
+  rm -f "$_sourcedir"/selfrestart.c
   patch --directory="$_sourcedir" -Np1 < dwm-r1615-selfrestart.diff
   patch --directory="$_sourcedir" -Np1 < dwm-vanitygaps-20190508-6.2.diff
 
