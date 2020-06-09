@@ -15,6 +15,8 @@ depends=('libx11' 'libxinerama' 'libxft' 'freetype2')
 install=dwm.install
 source=(http://dl.suckless.org/dwm/dwm-$pkgver.tar.gz
         dwm-fancybar-hide_vacant_tags-6.2.diff
+        dwm-swallow.diff
+        dwm-vanitygaps-20190508-6.2.diff
         https://dwm.suckless.org/patches/actualfullscreen/dwm-actualfullscreen-20191112-cb3f58a.diff
         https://dwm.suckless.org/patches/alpha/dwm-alpha-20180613-b69c870.diff
         https://dwm.suckless.org/patches/attachaside/dwm-attachaside-6.1.diff
@@ -24,11 +26,12 @@ source=(http://dl.suckless.org/dwm/dwm-$pkgver.tar.gz
         https://dwm.suckless.org/patches/noborder/dwm-noborderfloatingfix-6.2.diff
         https://dwm.suckless.org/patches/pertag/dwm-pertag-6.2.diff
         https://dwm.suckless.org/patches/selfrestart/dwm-r1615-selfrestart.diff
-        https://dwm.suckless.org/patches/vanitygaps/dwm-vanitygaps-20190508-6.2.diff
         config.h
         dwm.desktop)
 md5sums=('9929845ccdec4d2cc191f16210dd7f3d'
          '55486b80d31b59c92c6766029f55218d'
+         'bc7417af1a2f931b28d7eae6108ab9ce'
+         '331d572c27d8b8f66deeb5f57d106fb0'
          'd91950eed1d7cd232be05c7d3d0666ec'
          '4e5893e04c443530168223639c97bc47'
          'e67fab561c52b8380050130350fe0267'
@@ -38,10 +41,8 @@ md5sums=('9929845ccdec4d2cc191f16210dd7f3d'
          'a55c836f0d328c898ed00dedb4e9a286'
          '630051fbd9750a4344c599eb42bf69fb'
          'aa3d5f3c45057a2a6ee73aede3fc218a'
-         '3ee6971e9c9bd495916083e49c597bb5'
-         '4107cf92ca9e3207ad735cb313499cb2'
+         '67740f804d8e5450a94507f6078454de'
          '939f403a71b6e85261d09fc3412269ee')
-
 
 _sourcedir=$pkgname-$pkgver
 
@@ -57,6 +58,7 @@ prepare() {
   patch --directory="$_sourcedir" -Np1 < dwm-pertag-6.2.diff
   rm -f "$_sourcedir"/selfrestart.c
   patch --directory="$_sourcedir" -Np1 < dwm-r1615-selfrestart.diff
+  patch --directory="$_sourcedir" -Np1 < dwm-swallow.diff
   patch --directory="$_sourcedir" -Np1 < dwm-vanitygaps-20190508-6.2.diff
 
   cd "$srcdir/$pkgname-$pkgver"
