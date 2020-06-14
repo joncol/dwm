@@ -82,7 +82,7 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[]   = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_20000_leagues_under_the_sea, "-sf", col_gray4, NULL };
+static const char *dmenucmd[]   = { "dmenu_run", "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_20000_leagues_under_the_sea, "-sf", col_gray4, NULL };
 static const char *termcmd[]    = { "st", "-e", "tmux", NULL };
 static const char *lockcmd[]    = { "slock", NULL };
 static const char *voldowncmd[] = { ".local/bin/lower_volume.sh", NULL };
