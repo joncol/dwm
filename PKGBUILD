@@ -41,7 +41,7 @@ md5sums=('9929845ccdec4d2cc191f16210dd7f3d'
          'a55c836f0d328c898ed00dedb4e9a286'
          '630051fbd9750a4344c599eb42bf69fb'
          'aa3d5f3c45057a2a6ee73aede3fc218a'
-         'f0d99ff8066892c154e95514d7a4e152'
+         '87b2805fa6b2d3ad7a53f8029e86f3a6'
          '939f403a71b6e85261d09fc3412269ee')
 
 _sourcedir=$pkgname-$pkgver
